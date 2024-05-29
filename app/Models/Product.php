@@ -25,18 +25,17 @@ class Product extends Model
     ];
 
     protected $casts = [
-        'images' => 'array', // Ensure this cast is present
+        'images' => 'array',
     ];
 
-    // Delete images from storage when the product is deleted
     protected static function boot()
     {
         parent::boot();
 
         static::deleting(function ($product) {
-            if (is_array($product->images)) { // Ensure images is an array
+            if (is_array($product->images)) {
                 foreach ($product->images as $image) {
-                    Storage::disk('public')->delete($image); // Specify the public disk
+                    Storage::disk('public')->delete($image);
                 }
             }
         });

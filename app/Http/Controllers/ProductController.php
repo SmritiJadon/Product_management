@@ -59,7 +59,7 @@ class ProductController extends Controller
 
         if ($request->hasFile('images')) {
             $data['images'] = array_map(function ($image) {
-                return $image->store('products', 'public'); // Store on public disk
+                return $image->store('products', 'public');
             }, $request->file('images'));
         }
 
@@ -97,12 +97,12 @@ class ProductController extends Controller
     if ($request->hasFile('images')) {
         if (is_array($product->images)) {
             foreach ($product->images as $image) {
-                Storage::disk('public')->delete($image); // Specify the disk
+                Storage::disk('public')->delete($image);
             }
         }
 
         $data['images'] = array_map(function ($image) {
-            return $image->store('products', 'public'); // Store on public disk
+            return $image->store('products', 'public');
         }, $request->file('images'));
     }
 
@@ -115,7 +115,7 @@ class ProductController extends Controller
     {
         if (is_array($product->images)) {
             foreach ($product->images as $image) {
-                Storage::disk('public')->delete($image); // Specify the public disk
+                Storage::disk('public')->delete($image);
             }
         }
 
